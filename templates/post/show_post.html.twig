@@ -1,0 +1,35 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-12">
+            {% include 'components/_flashes.html.twig'%}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-10 my-4 mx-auto">
+
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title text-center mb-5">{{ post.title }}</h1>
+                    <p class="h4 text-center mb-3 text-secondary">{{ post.subtitle }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-center text-muted">Crée le : {{ post.createdAt | date('d/m/Y') }} | Par : </li>
+                </ul>
+                <img class="img-custom" src="{{ asset('uploads/' ~ post.photo) }}" alt="{{ post.title }}">
+                <div class="card-body">
+                    <p class="card-text my-4 col-10 mx-auto">{{ post.content | raw }}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{#    {{ render(controller('App\Controller\CommentaryController::addCommentary')) }}#}
+    {{ render(url('add_commentary', {'id': post.id}) ) }}
+
+{% endblock %}
+
