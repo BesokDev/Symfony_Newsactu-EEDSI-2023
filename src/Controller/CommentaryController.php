@@ -27,6 +27,18 @@ class CommentaryController extends AbstractController
         $form = $this->createForm(CommentaryType::class, $commentary)
             ->handleRequest($request);
 
+
+        if($form->isSubmitted() && $form->isValid() === false){
+
+            $this->addFlash('warning', 'Le commentaire ne peut être vide');
+
+            return $this->redirectToRoute('show_post', [
+                'cat_alias' => $post->getCategory()->getAlias(),
+                'post_alias' => $post->getAlias(),
+                'id' => $post->getId()
+            ]);
+        }
+
         if($form->isSubmitted() && $form->isValid()) {
 
             $commentary->setPost($post);

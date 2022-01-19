@@ -3,6 +3,7 @@
 
 {#{{ dump(app.request.attributes.get('id')) }}#}
 
+
         {{ form_start(form, { 'attr': { novalidate: 'novalidate', action: path('add_commentary', { 'id': app.request.attributes.get('id') }) }} ) }}
 
             {{ form_row(form.comment) }}
