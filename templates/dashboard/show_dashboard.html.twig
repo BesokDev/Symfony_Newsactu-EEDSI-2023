@@ -4,6 +4,8 @@
 
     <h2 class="text-center">Tableau de bord Administrateur</h2>
 
+    {{ dump(app.request.server) }}
+
     <div class="row">
         <div class="col-12 mx-auto">
             {% include 'components/_flashes.html.twig' %}
@@ -102,7 +104,7 @@
                             <td>{{ user.id }}</td>
                             <td>{{ user.firstname }}</td>
                             <td>{{ user.lastname }}</td>
-                            <td>{{ user.roles }}</td>
+                            <td>{{ user.roles[0] }}</td>
                             <td>{{ user.email }}</td>
                             <td>
                                 <a href="#" class="btn btn-info"><i class="fa fa-edit"></i></a> |
