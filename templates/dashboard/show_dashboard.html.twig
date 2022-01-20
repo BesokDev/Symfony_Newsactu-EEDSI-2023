@@ -61,8 +61,17 @@
                             <td>{{ category.id }}</td>
                             <td>{{ category.name }}</td>
                             <td>
-                                <a href="#" class="btn btn-info"><i class="fa fa-edit"></i></a> |
-                                <a href="#" class="btn btn-danger" onclick="return confirm('ATTENTION : Voulez-vous vraiment supprimer cette catégorie ?')"><i class="fa fa-trash"></i></a>
+                                {% if category.deletedAt is null %}
+                                    <a href="{{ path('update_category', {'id': category.id}) }}" class="btn btn-info" title="Modifier"><i class="fa fa-edit"></i></a> |
+                                {% else %}
+                                    <a href="{{ path('restore_category', {'id': category.id}) }}" class="btn btn-info" title="Restaurer"><i class="fa fa-recycle"></i></a> |
+                                {% endif %}
+
+                                {% if category.deletedAt is null %}
+                                    <a href="{{ path('soft_delete_category', {'id': category.id}) }}" class="btn btn-danger" title="Archiver" onclick="return confirm('ATTENTION : Vous allez archiver cette catégorie. Continuer ?')"><i class="fa fa-trash"></i></a>
+                                {% else %}
+                                    <a href="{{ path('hard_delete_category', {'id': category.id}) }}" class="btn btn-danger" title="Supprimer définitivement" onclick="return confirm('ATTENTION : Voulez-vous supprimer définitivement cette catégorie. Continuer ?')"><i class="fa fa-times"></i></a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %}

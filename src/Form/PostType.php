@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Post;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -75,7 +76,12 @@ class PostType extends AbstractType
                 'label' => 'Choisissez une catégorie',
                 'attr' => [
                     'class' => 'form-control'
-                ]
+                ],
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->where('c.deletedAt is NULL')
+                        ->orderBy('c.name', 'ASC');
+                },
             ])
             ->add('photo', FileType::class, [
                 'label' => 'Photo de l\'article',

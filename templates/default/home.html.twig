@@ -17,10 +17,9 @@
 
             <div class="col-3 my-3 mx-2">
                 <div class="card" style="width: 18rem; height: 26rem;">
-                    <img src="{{ asset('uploads/' ~ post.photo) }}" class="card-img-top img-card-custom" alt="{{ post.title }}">
-                    {#            <ul class="list-group list-group-flush">#}
-                    {#                <li class="list-group-item">Catégorie : </li>#}
-                    {#            </ul>#}
+
+                    <img style="object-fit: cover;" src="{{ asset('uploads/' ~ post.photo) }}" class="card-img-top img-card-custom" width="230" height="130" alt="{{ post.title }}">
+
                     <div class="card-body">
                         <h5 class="card-title">{{ post.title | length > 20 ? post.title | slice(0, 20) ~ '...' : post.title }}</h5>
                         <h6 class="card-title">{{ post.subtitle | length > 30 ? post.subtitle | slice(0, 30) ~ '...' : post.subtitle }}</h6>
