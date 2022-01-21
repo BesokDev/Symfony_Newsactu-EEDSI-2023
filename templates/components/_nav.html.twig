@@ -19,9 +19,14 @@
                     </li>
                 {% else %}
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ path('show_profile') }}">Espace Perso</a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
                     </li>
                 {% endif %}
+
 
 {# Pour vérifier le rôle d'un user en Twig, il vous faudra utiliser la méthode "is_granted()" #}
                 {% if is_granted("ROLE_ADMIN") %}

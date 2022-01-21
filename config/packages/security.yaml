@@ -38,6 +38,11 @@ security:
          - { path: ^/admin, roles: ROLE_ADMIN  }
          - { path: ^/profile, roles: ROLE_USER }
 
+    # La hiérarchisation des rôles vous permet de créer un héritage des droits utilisateurs
+    # Vous devez déclarer du role qui a le moins de droits vers celui qui en aura le plus.
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+
 when@test:
     security:
         password_hashers:

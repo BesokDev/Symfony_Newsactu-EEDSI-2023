@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Commentary;
 use App\Entity\Post;
+use App\Entity\User;
 use App\Form\CommentaryType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,6 +43,7 @@ class CommentaryController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
 
             $commentary->setPost($post);
+            $commentary->setAuthor($this->getUser());
 
             $entityManager->persist($commentary);
             $entityManager->flush();

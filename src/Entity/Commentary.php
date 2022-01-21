@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CommentaryRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=CommentaryRepository::class)
@@ -43,6 +44,11 @@ class Commentary
      * @ORM\JoinColumn(nullable=false)
      */
     private $post;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="commentaries")
+     */
+    private $author;
 
     public function __construct()
     {
@@ -111,6 +117,22 @@ class Commentary
     public function setPost(?Post $post): self
     {
         $this->post = $post;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param User|UserInterface|null $author
+     * @return $this
+     */
+    public function setAuthor($author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

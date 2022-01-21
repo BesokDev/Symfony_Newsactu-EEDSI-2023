@@ -7,6 +7,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -71,6 +72,11 @@ class Post
      * @ORM\OneToMany(targetEntity=Commentary::class, mappedBy="post")
      */
     private $commentaries;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
+     */
+    private $author;
 
     public function __construct()
     {
@@ -218,6 +224,25 @@ class Post
                 $commentary->setPost(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return User|null
+     */
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param User|UserInterface|null $author
+     * @return $this
+     */
+    public function setAuthor($author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

@@ -43,6 +43,7 @@ class PostController extends AbstractController
 
             # On set l'alias de l'article avec le slugger
             $post->setAlias($this->slugger->slug($form->get('title')->getData()));
+            $post->setAuthor($this->getUser());
 
             # La méthode getData() vous permet de récupérer les valeurs du form et de les passer à l'objet $post
                 # => En fait on "hydrate" notre objet Post dès la ligne 25, donc pas nécessaire de getData() ici.
