@@ -130,9 +130,7 @@ class PostController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', "L'article". $post->getTitle() ." à bien été modifié !");
-
             return $this->redirectToRoute('show_dashboard');
-
         }
 
         return $this->render('post/form_post.html.twig', [
